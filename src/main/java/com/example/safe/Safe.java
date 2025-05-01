@@ -1,4 +1,4 @@
 package com.example.safe;
 
-public class Sejf {
+public class Safe {
 }
