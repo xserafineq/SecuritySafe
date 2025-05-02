@@ -13,6 +13,8 @@ module com.example.safe {
     requires org.hibernate.orm.core;
     requires jakarta.persistence;
     requires java.naming;
+    requires java.desktop;
+    requires spring.security.crypto;
     opens com.example.safe to javafx.fxml;
     opens model to org.hibernate.orm.core;
     exports com.example.safe;

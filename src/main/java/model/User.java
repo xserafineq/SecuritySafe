@@ -1,31 +1,62 @@
 package model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "uzytkownicy",schema = "safe")
+@Table(name = "users",schema = "safe")
 public class User {
 
     @Id
-    @Column(name = "id_uzytkownik")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int id;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "haslo")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "data_dolaczenia")
-    private String joinedDate;
+    @Column(name = "join_date")
+    private LocalDate joineDate;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public LocalDate getJoineDate() {
+        return joineDate;
+    }
+
+    public void setJoineDate(LocalDate joineDate) {
+        this.joineDate = joineDate;
+    }
 
     @Override
     public String toString() {
-        return id + "\t" + email + "\t" + password + "\t" + joinedDate;
+        return id + "\t" + email + "\t" + password + "\t" + joineDate;
     }
 }
