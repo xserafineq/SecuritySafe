@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -33,12 +34,21 @@ public class HelloController {
             System.out.println("Login successful");
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("safe.fxml"));
             Parent root = loader.load();
+
+            SafeController controller = loader.getController();
+            controller.setData(new UserService().findUserByEmail(email.getText()));
+            controller.start();
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         }
         else {
-            System.out.println("Login failed");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Logowanie nie powiodlo sie");
+            alert.setContentText("Sprobuj ponownie");
+            alert.show();
         }
 
     }

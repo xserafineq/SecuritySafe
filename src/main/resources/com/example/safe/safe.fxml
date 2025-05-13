@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:controller="com.example.safe.Controllers.SafeController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f7f8fa;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f7f8fa;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.safe.Controllers.SafeController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -16,7 +16,7 @@
     <left>
         <ScrollPane prefHeight="342.0" prefWidth="168.0" style="-fx-hbar-policy: never; -fx-vbar-policy: never; -fx-border-color: #ebeced;" BorderPane.alignment="CENTER">
             <content>
-                <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="342.0" prefWidth="173.0" style="-fx-background-color: #f7f8fa;">
+                <VBox fx:id="itemList" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="342.0" prefWidth="173.0" style="-fx-background-color: #f7f8fa;">
                <children>
                   <Text fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="🗝 Elementy" wrappingWidth="161.93670773506165">
                      <font>
@@ -26,7 +26,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Text>
-                  <ListView prefHeight="294.0" prefWidth="52.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #f7f8fa;">
+                  <ListView fx:id="itemsList" prefHeight="294.0" prefWidth="52.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #f7f8fa;">
                      <VBox.margin>
                         <Insets right="20.0" />
                      </VBox.margin>
@@ -104,7 +104,7 @@
                         <Font name="Candara Bold" size="14.0" />
                     </font>
                 </Text>
-                <Text fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="nazwa" textAlignment="CENTER" wrappingWidth="93.33673214912415" />
+                <Text fx:id="categoryText" fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="nazwa" textAlignment="CENTER" wrappingWidth="93.33673214912415" />
             </children>
         </VBox>
     </right>

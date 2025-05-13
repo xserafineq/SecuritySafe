@@ -21,7 +21,19 @@ public class User {
     private String password;
 
     @Column(name = "join_date")
-    private LocalDate joineDate;
+    private LocalDate joinDate;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+    private Safe safe;
+
+
+    public void setSafe(Safe safe) {
+        this.safe = safe;
+    }
+
+    public Safe getSafe() {
+        return safe;
+    }
 
     public int getId() {
         return id;
@@ -47,16 +59,13 @@ public class User {
         this.password = password;
     }
 
-    public LocalDate getJoineDate() {
-        return joineDate;
-    }
 
-    public void setJoineDate(LocalDate joineDate) {
-        this.joineDate = joineDate;
+    public void setJoinDate(LocalDate joineDate) {
+        this.joinDate = joineDate;
     }
 
     @Override
     public String toString() {
-        return id + "\t" + email + "\t" + password + "\t" + joineDate;
+        return id + "\t" + email + "\t" + password + "\t" + joinDate;
     }
 }

@@ -7,7 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.User;
 import org.hibernate.cfg.Environment;
@@ -30,7 +32,16 @@ public class RegisterController {
         User user = new User();
         user.setEmail(email.getText());
         user.setPassword(password.getText());
-        new UserService().registerUser(user);
+        try {
+            new UserService().registerUser(user);
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage());
+            alert.show();
+            return;
+        }
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("safe.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -38,6 +49,12 @@ public class RegisterController {
         stage.show();
     }
 
-
-
+    @FXML
+    private void loginView(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }
