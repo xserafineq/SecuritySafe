@@ -19,7 +19,6 @@ public class UserService {
             User user = session.createQuery("FROM User WHERE email = :email", User.class)
                     .setParameter("email", email)
                             .uniqueResult();
-
            if(user==null) {
                return false;
            }

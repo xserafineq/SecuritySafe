@@ -22,6 +22,12 @@ public class Safe {
     @OneToMany(mappedBy = "safe", cascade = CascadeType.ALL)
     private List<Note> notes;
 
+    @OneToMany(mappedBy = "safe", cascade = CascadeType.ALL)
+    private List<Password> passwords;
+
+    @OneToMany(mappedBy = "safe", cascade = CascadeType.ALL)
+    private List<HyperLink> hyperlinks;
+
 
     public int getId() {
         return id;
