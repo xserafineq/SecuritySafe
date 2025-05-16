@@ -1,5 +1,6 @@
 package com.example.safe.Controllers;
 
+import com.example.safe.Alerts.ConnectionAlert;
 import com.example.safe.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,14 +36,16 @@ public class RegisterController {
         try {
             new UserService().registerUser(user);
         }catch (Exception e){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText(e.getMessage());
-            alert.show();
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Error");
+//            alert.setHeaderText(null);
+//            alert.setContentText(e.getMessage());
+//            alert.show();
+            new ConnectionAlert("Błąd","Wystąpił błąd podczas rejestracji",
+                    "Spróbuj ponownie", Alert.AlertType.ERROR);
             return;
         }
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("safe.fxml"));
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));

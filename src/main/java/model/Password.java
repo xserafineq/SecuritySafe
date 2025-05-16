@@ -38,4 +38,8 @@ public class Password extends SafeItem{
     public String getLogin() {
         return login;
     }
+
+    public int getId() {
+        return id;
+    }
 }

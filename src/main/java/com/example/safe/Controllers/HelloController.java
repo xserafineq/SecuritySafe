@@ -1,5 +1,6 @@
 package com.example.safe.Controllers;
 
+import com.example.safe.Alerts.ConnectionAlert;
 import com.example.safe.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,29 +26,27 @@ public class HelloController {
     private TextField password;
 
     @FXML
-    private void login(ActionEvent event) throws IOException {
+    private void login(ActionEvent event) throws Exception {
         UserService equalDataService = new UserService();
 
         boolean loginSuccesfull = equalDataService.equalLoginData(email.getText(), password.getText());
         if (loginSuccesfull) {
             System.out.println("Login successful");
+
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("safe.fxml"));
             Parent root = loader.load();
 
-            SafeController controller = loader.getController();
-            controller.setData(new UserService().findUserByEmail(email.getText()));
-            controller.start();
+            SafeController safeController = loader.getController();
+            safeController.setData(new UserService().findUserByEmail(email.getText()));
+            safeController.start();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Logowanie nie powiodlo sie");
-            alert.setContentText("Sprobuj ponownie");
-            alert.show();
+            new ConnectionAlert("Błąd","Wystąpił błąd podczas logowania",
+                    "Spróbuj ponownie", Alert.AlertType.ERROR);
         }
 
     }

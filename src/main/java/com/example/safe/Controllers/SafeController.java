@@ -45,6 +45,8 @@ public class SafeController {
     @FXML
     public Button showBtn;
     @FXML
+    public Button deleteBtn;
+    @FXML
     public Menu logoutButton;
     @FXML
     public VBox passwordPanel;
@@ -57,7 +59,7 @@ public class SafeController {
         this.user = user;
     };
 
-    public void start() {
+    public void start() throws Exception {
 
         categoryItemChoiceBox.setOnAction(event -> {
 
@@ -70,13 +72,14 @@ public class SafeController {
                         Password password = (Password) new PasswordService().getItem(user,itemsList.getSelectionModel().getSelectedItem());
                         System.out.println(password.getName());
                         loginInput.setText(password.getLogin());
-                        passwordInput.setText(new PasswordService().drawHidenPassword(password.getPassword()));
+                        System.out.println(password.getLogin());
+                        passwordInput.setText(new PasswordService().hideContent(password.getPassword()));
 
                         AtomicBoolean passShowed = new AtomicBoolean(false);
 
                         showBtn.setOnAction(e2 -> {
                             if(passShowed.get()) {
-                                passwordInput.setText(new PasswordService().drawHidenPassword(password.getPassword()));
+                                passwordInput.setText(new PasswordService().hideContent(password.getPassword()));
                                 passShowed.set(false);
                             }
                             else {
@@ -84,11 +87,23 @@ public class SafeController {
                                 passShowed.set(true);
                             }
                         });
+
+                        deleteBtn.setOnAction( e2 -> {
+                            new PasswordService().removeItem(password.getId());
+                            fillListView(option);
+                        });
+
                         break;
                     case "Notatki":
                         Note note = (Note) new NoteService().getItem(user,itemsList.getSelectionModel().getSelectedItem());
                         System.out.println(note.getTitle());
                         noteInput.setText(note.getContent());
+
+                        deleteBtn.setOnAction( e2 -> {
+                            new NoteService().removeItem(note.getId());
+                            fillListView(option);
+                        });
+
                         break;
                     case "Linki":
                         HyperLink link = (HyperLink) new HyperLinkService().getItem(user,itemsList.getSelectionModel().getSelectedItem());

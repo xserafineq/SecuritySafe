@@ -1,9 +1,6 @@
 package service;
 
-import model.HyperLink;
-import model.Password;
-import model.SafeItem;
-import model.User;
+import model.*;
 import org.hibernate.Session;
 
 import static database.HibernateUtil.sessionFactory;
@@ -21,5 +18,11 @@ public class HyperLinkService extends ItemService {
                     .uniqueResult();
         }
     }
+
+    @Override
+    public void removeItem(int id) {
+
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package service;
 import model.Password;
+import model.Safe;
 import model.SafeItem;
 import model.User;
 import org.hibernate.Session;
@@ -15,16 +16,22 @@ public class PasswordService extends ItemService{
                             "FROM Password WHERE safe.id = :safeId and name = :name", Password.class)
                     .setParameter("safeId", safeId)
                     .setParameter("name", title)
+                    .setMaxResults(1)
                     .uniqueResult();
         }
     }
 
-
-    public String drawHidenPassword(String password) {
-        String passwordHiden = "";
-        for(int i=0;i<password.toString().length();i++){
-            passwordHiden += "*";
+    @Override
+    public void removeItem(int id) {
+        try (Session session = sessionFactory.openSession()) {
+            Password password = session.get(Password.class, id);
+            session.beginTransaction();
+            session.delete(password);
+            session.getTransaction().commit();
+        }catch (Exception e) {
+            e.getMessage();
         }
-        return passwordHiden;
     }
+
+
 }

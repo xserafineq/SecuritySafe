@@ -1,8 +1,6 @@
 package service;
 
-import model.Note;
-import model.SafeItem;
-import model.User;
+import model.*;
 import org.controlsfx.control.PropertySheet;
 import org.hibernate.Session;
 import static database.HibernateUtil.sessionFactory;
@@ -21,4 +19,18 @@ public class NoteService extends ItemService {
                     .uniqueResult();
         }
     }
+
+    @Override
+    public void removeItem(int id) {
+        try (Session session = sessionFactory.openSession()) {
+            Note note = session.get(Note.class, id);
+            session.beginTransaction();
+            session.delete(note);
+            session.getTransaction().commit();
+        }catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+
 }
