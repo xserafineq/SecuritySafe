@@ -33,4 +33,8 @@ public class HyperLink extends SafeItem{
     public Long getId() {
         return id;
     }
+
+    public String getUrl() {
+        return url;
+    }
 }

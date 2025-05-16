@@ -11,7 +11,7 @@
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
-                <Menu mnemonicParsing="false" onAction="#logout" text="⏻ Wyloguj" />
+                <Menu fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" text="⏻ Wyloguj" />
             </menus>
         </MenuBar>
     </top>
@@ -56,52 +56,126 @@
     <center>
         <VBox style="-fx-border-color: #ebeced;" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="350.0" prefWidth="266.0">
-               <children>
-                  <Text fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="Dane logowania" wrappingWidth="161.93670773506165">
-                     <font>
-                        <Font name="Candara Bold" size="22.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </Text>
-                  <TextField fx:id="loginInput" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="142.0" promptText="login" style="-fx-background-radius: 20;">
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <TextField fx:id="passwordInput" promptText="hasło" style="-fx-background-radius: 20;" />
-                  <HBox alignment="CENTER" prefHeight="138.0" prefWidth="266.0">
-                     <children>
-                        <Button fx:id="showBtn" layoutX="153.0" layoutY="36.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #9cf060; -fx-border-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" text="👁️‍🗨️" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #58aef5; -fx-border-radius: 20; -fx-border-color: white; -fx-background-radius: 20;" text="Edytuj" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button layoutX="100.0" layoutY="14.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #f05a43; -fx-border-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" text="Usuń" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="100.0" />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-            </VBox>
+             <VBox fx:id="passwordPanel" layoutX="21.0" layoutY="31.0" prefHeight="350.0" prefWidth="266.0" visible="false">
+                 <children>
+                     <Text fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="Dane logowania" wrappingWidth="161.93670773506165">
+                         <font>
+                             <Font name="Candara Bold" size="22.0" />
+                         </font>
+                         <VBox.margin>
+                             <Insets bottom="20.0" />
+                         </VBox.margin>
+                     </Text>
+                     <TextField fx:id="loginInput" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="142.0" promptText="login" style="-fx-background-radius: 20;">
+                         <VBox.margin>
+                             <Insets bottom="20.0" />
+                         </VBox.margin>
+                     </TextField>
+                     <TextField fx:id="passwordInput" promptText="hasło" style="-fx-background-radius: 20;" />
+                     <HBox alignment="CENTER" prefHeight="138.0" prefWidth="266.0">
+                         <children>
+                             <Button fx:id="showBtn" layoutX="153.0" layoutY="36.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #9cf060; -fx-border-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" text="👁️‍🗨️" textFill="WHITE">
+                                 <font>
+                                     <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                     <Insets right="20.0" />
+                                 </HBox.margin>
+                             </Button>
+                             <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #58aef5; -fx-border-radius: 20; -fx-border-color: white; -fx-background-radius: 20;" text="Edytuj" textFill="WHITE">
+                                 <font>
+                                     <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                     <Insets right="20.0" />
+                                 </HBox.margin>
+                             </Button>
+                             <Button layoutX="100.0" layoutY="14.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #f05a43; -fx-border-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" text="Usuń" textFill="WHITE">
+                                 <font>
+                                     <Font name="System Bold" size="14.0" />
+                                 </font>
+                             </Button>
+                         </children>
+                         <VBox.margin>
+                             <Insets top="100.0" />
+                         </VBox.margin>
+                     </HBox>
+                 </children>
+             </VBox>
+             <VBox fx:id="notesPanel" layoutX="21.0" layoutY="31.0" prefHeight="350.0" prefWidth="266.0" visible="false">
+                 <children>
+                     <Text fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="Notatka" wrappingWidth="161.93670773506165">
+                         <font>
+                             <Font name="Candara Bold" size="22.0" />
+                         </font>
+                         <VBox.margin>
+                             <Insets bottom="20.0" />
+                         </VBox.margin>
+                     </Text>
+                     <TextArea fx:id="noteInput"  wrapText="true" prefWidth="266.0" promptText="Zawartosc notatki" style="-fx-background-radius: 20;">
+                         <VBox.margin>
+                             <Insets bottom="20.0" />
+                         </VBox.margin>
+                     </TextArea>
+                     <HBox alignment="CENTER" prefHeight="277.0" prefWidth="266.0">
+                         <children>
+                             <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="67.0" style="-fx-background-color: #58aef5; -fx-border-radius: 20; -fx-border-color: white; -fx-background-radius: 20;" text="Edytuj" textFill="WHITE">
+                                 <font>
+                                     <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                     <Insets right="20.0" />
+                                 </HBox.margin>
+                             </Button>
+                             <Button layoutX="100.0" layoutY="14.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #f05a43; -fx-border-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" text="Usuń" textFill="WHITE">
+                                 <font>
+                                     <Font name="System Bold" size="14.0" />
+                                 </font>
+                             </Button>
+                         </children>
+                         <VBox.margin>
+                             <Insets />
+                         </VBox.margin>
+                     </HBox>
+                 </children>
+             </VBox>
+             <VBox fx:id="linksPanel" layoutX="21.0" layoutY="31.0" prefHeight="350.0" prefWidth="266.0" visible="false">
+                 <children>
+                     <Text fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="Link" wrappingWidth="161.93670773506165">
+                         <font>
+                             <Font name="Candara Bold" size="22.0" />
+                         </font>
+                         <VBox.margin>
+                             <Insets bottom="20.0" />
+                         </VBox.margin>
+                     </Text>
+                     <TextArea fx:id="linkInput" wrapText="true" prefHeight="331.0" prefWidth="266.0" promptText="Adres url" style="-fx-background-radius: 20;">
+                         <VBox.margin>
+                             <Insets bottom="20.0" />
+                         </VBox.margin>
+                     </TextArea>
+                     <HBox alignment="CENTER" prefHeight="277.0" prefWidth="266.0">
+                         <children>
+                             <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="67.0" style="-fx-background-color: #58aef5; -fx-border-radius: 20; -fx-border-color: white; -fx-background-radius: 20;" text="Edytuj" textFill="WHITE">
+                                 <font>
+                                     <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                     <Insets right="20.0" />
+                                 </HBox.margin>
+                             </Button>
+                             <Button layoutX="100.0" layoutY="14.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #f05a43; -fx-border-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" text="Usuń" textFill="WHITE">
+                                 <font>
+                                     <Font name="System Bold" size="14.0" />
+                                 </font>
+                             </Button>
+                         </children>
+                         <VBox.margin>
+                             <Insets />
+                         </VBox.margin>
+                     </HBox>
+                 </children>
+             </VBox>
          </children>
          <padding>
             <Insets left="10.0" right="20.0" top="20.0" />
