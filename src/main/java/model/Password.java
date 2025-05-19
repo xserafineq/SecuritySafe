@@ -42,4 +42,32 @@ public class Password extends SafeItem{
     public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLast_modified(LocalDate last_modified) {
+        this.last_modified = last_modified;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setSafe(Safe safe) {
+        this.safe = safe;
+    }
 }

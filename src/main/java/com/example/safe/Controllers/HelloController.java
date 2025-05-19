@@ -1,5 +1,6 @@
 package com.example.safe.Controllers;
 
+import com.almasb.fxgl.multiplayer.MultiplayerService;
 import com.example.safe.Alerts.ConnectionAlert;
 import com.example.safe.HelloApplication;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import service.SessionLogService;
 import service.UserService;
 
 import java.io.IOException;
@@ -32,7 +34,7 @@ public class HelloController {
         boolean loginSuccesfull = equalDataService.equalLoginData(email.getText(), password.getText());
         if (loginSuccesfull) {
             System.out.println("Login successful");
-
+            new SessionLogService().addSessionLog(loginSuccesfull, new UserService().findUserByEmail(email.getText()));
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("safe.fxml"));
             Parent root = loader.load();
 
@@ -45,6 +47,7 @@ public class HelloController {
             stage.show();
         }
         else {
+            new SessionLogService().addSessionLog(loginSuccesfull, new UserService().findUserByEmail(email.getText()));
             new ConnectionAlert("Błąd","Wystąpił błąd podczas logowania",
                     "Spróbuj ponownie", Alert.AlertType.ERROR);
         }

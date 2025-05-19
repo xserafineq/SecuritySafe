@@ -58,8 +58,6 @@ public class UserService {
                         user.setSafe(safe);
                 session.getTransaction().commit();
 
-                System.out.println("xd: " + user.getSafe().getId());
-
                 return user;
             }
             else {

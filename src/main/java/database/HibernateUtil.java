@@ -16,6 +16,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(Category.class)
                     .addAnnotatedClass(Password.class)
                     .addAnnotatedClass(HyperLink.class)
+                    .addAnnotatedClass(SessionLog.class)
                     .buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);

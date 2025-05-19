@@ -123,7 +123,7 @@
                             <Insets bottom="40"/>
                         </HBox.margin>
                     </Button>
-                    <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #58aef5; -fx-border-radius: 20; -fx-border-color: white; -fx-background-radius: 20;" text="📝" textFill="WHITE">
+                    <Button fx:id="editBtn" mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #58aef5; -fx-border-radius: 20; -fx-border-color: white; -fx-background-radius: 20;" text="📝" textFill="WHITE">
                         <font>
                             <Font name="System Bold" size="20.0" />
                         </font>
@@ -132,7 +132,7 @@
                             <Insets bottom="40"/>
                         </HBox.margin>
                     </Button>
-                    <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #66e85d; -fx-border-radius: 20; -fx-border-color: white; -fx-background-radius: 20;" text="✚" textFill="WHITE">
+                    <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="57.0" prefWidth="67.0" style="-fx-background-color: #66e85d; -fx-border-radius: 20; -fx-border-color: white; -fx-background-radius: 20;" text="✚" textFill="WHITE">
                         <font>
                             <Font name="System Bold" size="20.0" />
                         </font>
@@ -158,27 +158,7 @@
     </center>
     <right>
         <VBox alignment="TOP_CENTER" prefHeight="342.0" prefWidth="133.0" style="-fx-border-color: #ebeced;" BorderPane.alignment="CENTER">
-            <children>
-                <Text fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Utworzenia" wrappingWidth="102.93670773506165">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
-                    <font>
-                        <Font name="Candara Bold" size="14.0" />
-                    </font>
-                </Text>
-                <Text fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="xx.xx.xxxx" textAlignment="CENTER" wrappingWidth="93.33673214912415">
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </Text>
-                <Text fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategoria" textAlignment="CENTER" wrappingWidth="102.93670773506165">
-                    <font>
-                        <Font name="Candara Bold" size="14.0" />
-                    </font>
-                </Text>
-                <Text fx:id="categoryText" fill="#484848" strokeType="OUTSIDE" strokeWidth="0.0" text="nazwa" textAlignment="CENTER" wrappingWidth="93.33673214912415" />
-            </children>
+
         </VBox>
     </right>
     <bottom>

@@ -44,4 +44,16 @@ public class Safe {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public List<Password> getPasswords() {
+        return passwords;
+    }
+
+    public List<HyperLink> getHyperlinks() {
+        return hyperlinks;
+    }
 }

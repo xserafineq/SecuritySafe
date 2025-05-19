@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "users",schema = "safe")
@@ -26,6 +27,8 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
     private Safe safe;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<SessionLog> sessionLogs;
 
     public void setSafe(Safe safe) {
         this.safe = safe;

@@ -43,4 +43,24 @@ public class Note extends SafeItem{
     public Safe getSafe() {
         return safe;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setSafe(Safe safe) {
+        this.safe = safe;
+    }
 }

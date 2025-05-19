@@ -1,4 +1,6 @@
 package com.example.safe.Controllers;
+import com.example.safe.Alerts.ConfirmationAlert;
+import com.example.safe.Alerts.PromptDialog;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,13 +12,11 @@ import model.HyperLink;
 import model.Note;
 import model.Password;
 import model.User;
-import service.HyperLinkService;
-import service.NoteService;
-import service.PasswordService;
-import service.SafeService;
+import service.*;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SafeController {
 
@@ -35,10 +35,8 @@ public class SafeController {
     public TextField loginInput;
     @FXML
     public TextField passwordInput;
-
     @FXML
     public TextArea noteInput;
-
     @FXML
     public TextArea linkInput;
 
@@ -47,13 +45,19 @@ public class SafeController {
     @FXML
     public Button deleteBtn;
     @FXML
+    public Button editBtn;
+    @FXML
+    public Button addBtn;
+    @FXML
     public Menu logoutButton;
+
     @FXML
     public VBox passwordPanel;
     @FXML
     public VBox notesPanel;
     @FXML
     public VBox linksPanel;
+
 
     public void setData(User user) {
         this.user = user;
@@ -72,6 +76,7 @@ public class SafeController {
                         Password password = (Password) new PasswordService().getItem(user,itemsList.getSelectionModel().getSelectedItem());
                         System.out.println(password.getName());
                         loginInput.setText(password.getLogin());
+                        String oldLogin = password.getLogin();
                         System.out.println(password.getLogin());
                         passwordInput.setText(new PasswordService().hideContent(password.getPassword()));
 
@@ -88,31 +93,93 @@ public class SafeController {
                             }
                         });
 
+
                         deleteBtn.setOnAction( e2 -> {
-                            new PasswordService().removeItem(password.getId());
-                            fillListView(option);
+                            if(new ConfirmationAlert("Usuwanie","Czy napewno chcesz usunąć?","Działanie jest nieodwracalne").isRespond()) {
+                                new PasswordService().removeItem(password.getId());
+                                fillListView(option);
+                            };
+
                         });
+
+                        editBtn.setOnAction( e3 -> {
+                            if(new ConfirmationAlert("Edytowanie","Czy napewno chcesz edytowac","Działanie jest nieodwracalne").isRespond()) {
+                                new PasswordService().updateItem(oldLogin, loginInput.getText(), passwordInput.getText(), user);
+                            }
+                        });
+
 
                         break;
                     case "Notatki":
                         Note note = (Note) new NoteService().getItem(user,itemsList.getSelectionModel().getSelectedItem());
                         System.out.println(note.getTitle());
-                        noteInput.setText(note.getContent());
+                        noteInput.setText(new NoteService().hideContent(note.getContent()));
 
-                        deleteBtn.setOnAction( e2 -> {
-                            new NoteService().removeItem(note.getId());
-                            fillListView(option);
+                        AtomicBoolean noteContentShowed = new AtomicBoolean(false);
+
+                        showBtn.setOnAction(e2 -> {
+                            if(noteContentShowed.get()) {
+                                noteInput.setText(new NoteService().hideContent(note.getContent()));
+                                noteContentShowed.set(false);
+                            }
+                            else {
+                                noteInput.setText(note.getContent());
+                                noteContentShowed.set(true);
+                            }
+                        });
+
+                        deleteBtn.setOnAction(e2->{
+                            if(new ConfirmationAlert("Usuwanie","Czy napewno chcesz usunąć?","Działanie jest nieodwracalne").isRespond()) {
+                                new NoteService().removeItem(note.getId());
+                                fillListView(option);
+                            };
+                        });
+
+                        editBtn.setOnAction( e3 -> {
+                            if(new ConfirmationAlert("Edytowanie","Czy napewno chcesz edytowac","Działanie jest nieodwracalne").isRespond()) {
+                                new NoteService().updateItem(note.getContent(),noteInput.getText(),user);
+                            }
                         });
 
                         break;
                     case "Linki":
                         HyperLink link = (HyperLink) new HyperLinkService().getItem(user,itemsList.getSelectionModel().getSelectedItem());
                         System.out.println(link.getTitle());
-                        linkInput.setText(link.getUrl());
+
+                        linkInput.setText(new NoteService().hideContent(link.getUrl()));
+
+                        AtomicBoolean linkContentShowed = new AtomicBoolean(false);
+
+                        showBtn.setOnAction(e2 -> {
+                            if(linkContentShowed.get()) {
+                                linkInput.setText(new NoteService().hideContent(link.getUrl()));
+                                linkContentShowed.set(false);
+                            }
+                            else {
+                                linkInput.setText(link.getUrl());
+                                linkContentShowed.set(true);
+                            }
+                        });
+
+                        deleteBtn.setOnAction(e2 -> {
+                            if(new ConfirmationAlert("Usuwanie","Czy napewno chcesz usunąć?","Działanie jest nieodwracalne").isRespond()) {
+                                new HyperLinkService().removeItem(link.getId());
+                                fillListView(option);
+                            };
+                        });
+
+                        editBtn.setOnAction( e3 -> {
+                            if(new ConfirmationAlert("Edytowanie","Czy napewno chcesz edytowac","Działanie jest nieodwracalne").isRespond()) {
+                                new HyperLinkService().updateItem(link.getUrl(),noteInput.getText(),user);
+                            }
+                        });
+
                         break;
                 }
 
             });
+
+
         });
 
 
@@ -159,6 +226,11 @@ public class SafeController {
                 linksPanel.setManaged(false);
                 notesPanel.setVisible(false);
                 notesPanel.setManaged(false);
+
+                addBtn.setOnAction( e3 -> {
+                    new PromptDialog("Hasło","Login","Hasło","Nazwa",user);
+                });
+
                 break;
             case "Notatki":
                 passwordPanel.setVisible(false);
@@ -167,6 +239,11 @@ public class SafeController {
                 linksPanel.setManaged(false);
                 notesPanel.setVisible(true);
                 notesPanel.setManaged(true);
+
+                addBtn.setOnAction( e3 -> {
+                    new PromptDialog("Notatka","Nazwa","Zawartość","Nazwa",user);
+                });
+
                 break;
             case "Linki":
                 passwordPanel.setVisible(false);
@@ -175,6 +252,9 @@ public class SafeController {
                 linksPanel.setManaged(true);
                 notesPanel.setVisible(false);
                 notesPanel.setManaged(false);
+                addBtn.setOnAction( e3 -> {
+                    new PromptDialog("Link","Nazwa","Odnośnik","Nazwa",user);
+                });
                 break;
         }
     }

@@ -1,8 +1,10 @@
 package service;
 
 import model.*;
-import org.controlsfx.control.PropertySheet;
 import org.hibernate.Session;
+
+import java.time.LocalDate;
+
 import static database.HibernateUtil.sessionFactory;
 
 
@@ -32,5 +34,45 @@ public class NoteService extends ItemService {
         }
     }
 
+    @Override
+    public void addItem(String s1, String s2, String s3, User user) {
+
+    }
+
+    @Override
+    public void addItem(String s1, String s2, User user) {
+        try (Session session = sessionFactory.openSession()) {
+
+            Note note = new Note();
+            note.setTitle(s1);
+            note.setContent(s2);
+            note.setSafe(user.getSafe());
+            session.beginTransaction();
+            session.save(note);
+            session.getTransaction().commit();
+
+        }
+    }
+
+    @Override
+    public void updateItem(String s1, String s2,String s3,User user) {
+
+    }
+
+    @Override
+    public void updateItem(String s1, String s2, User user) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            int safeId = user.getSafe().getId();
+            Note result = session.createQuery(
+                            "FROM Note p WHERE p.content = :s1 and p.safe.id=: safeId", Note.class)
+                    .setParameter("safeId", safeId)
+                    .setParameter("s1", s1)
+                    .uniqueResult();
+            result.setContent(s2);
+            session.update(result);
+            session.getTransaction().commit();
+        }
+    }
 
 }

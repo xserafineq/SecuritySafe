@@ -11,7 +11,7 @@ public class HyperLink extends SafeItem{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="hyperlink_id")
-    private Long id;
+    private int id;
     @Column(name = "title")
     private String title;
     @Column(name="url")
@@ -30,11 +30,35 @@ public class HyperLink extends SafeItem{
         return title;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
     public String getUrl() {
         return url;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setLastModified(LocalDate lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setSafe(Safe safe) {
+        this.safe = safe;
     }
 }
