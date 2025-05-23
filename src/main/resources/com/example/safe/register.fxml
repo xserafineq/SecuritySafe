@@ -15,12 +15,12 @@
                         <VBox alignment="CENTER" opacity="0.9" prefHeight="398.0" prefWidth="250.0">
                             <children>
                                 <ImageView fitHeight="197.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="https://static.thenounproject.com/png/10982-200.png" />
-                                    </image>
                                     <VBox.margin>
                                         <Insets />
                                     </VBox.margin>
+                           <image>
+                              <Image url="https://static.thenounproject.com/png/10982-200.png" />
+                           </image>
                                 </ImageView>
                                 <Text fill="#2c2c2c" fontSmoothingType="LCD" strokeType="INSIDE" strokeWidth="0.0" text="S E J F">
                                     <font>

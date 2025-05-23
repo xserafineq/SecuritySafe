@@ -16,7 +16,6 @@ import service.*;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class SafeController {
 
@@ -26,11 +25,8 @@ public class SafeController {
     ListView<String> itemsList;
     private ObservableList<String> items = FXCollections.observableArrayList();
     @FXML
-    private Text itemsTextName;
-    @FXML
-    private Text categoryText;
-    @FXML
     public ChoiceBox categoryItemChoiceBox;
+
     @FXML
     public TextField loginInput;
     @FXML
@@ -57,17 +53,16 @@ public class SafeController {
     public VBox notesPanel;
     @FXML
     public VBox linksPanel;
-
+    public String option;
 
     public void setData(User user) {
         this.user = user;
     };
 
     public void start() throws Exception {
-
         categoryItemChoiceBox.setOnAction(event -> {
 
-            String option = (String) categoryItemChoiceBox.getSelectionModel().getSelectedItem();
+            option = (String) categoryItemChoiceBox.getSelectionModel().getSelectedItem();
             fillListView(option);
 
             itemsList.setOnMouseClicked(e -> {
@@ -107,7 +102,6 @@ public class SafeController {
                                 new PasswordService().updateItem(oldLogin, loginInput.getText(), passwordInput.getText(), user);
                             }
                         });
-
 
                         break;
                     case "Notatki":
@@ -229,6 +223,7 @@ public class SafeController {
 
                 addBtn.setOnAction( e3 -> {
                     new PromptDialog("Hasło","Login","Hasło","Nazwa",user);
+                    fillListView(option);
                 });
 
                 break;
@@ -242,6 +237,7 @@ public class SafeController {
 
                 addBtn.setOnAction( e3 -> {
                     new PromptDialog("Notatka","Nazwa","Zawartość","Nazwa",user);
+                    fillListView(option);
                 });
 
                 break;
@@ -254,6 +250,7 @@ public class SafeController {
                 notesPanel.setManaged(false);
                 addBtn.setOnAction( e3 -> {
                     new PromptDialog("Link","Nazwa","Odnośnik","Nazwa",user);
+                    fillListView(option);
                 });
                 break;
         }

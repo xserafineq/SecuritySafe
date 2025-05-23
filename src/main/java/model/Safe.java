@@ -1,9 +1,6 @@
 package model;
 
 import jakarta.persistence.*;
-import model.User;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

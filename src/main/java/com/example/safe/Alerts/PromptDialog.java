@@ -1,8 +1,6 @@
 package com.example.safe.Alerts;
 
-import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import com.example.safe.Controllers.SafeController;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;

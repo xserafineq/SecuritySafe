@@ -1,6 +1,5 @@
 package service;
 
-import model.Note;
 import model.SessionLog;
 import model.User;
 import org.hibernate.Session;

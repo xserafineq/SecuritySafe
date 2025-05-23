@@ -1,8 +1,6 @@
 package model;
 
 import jakarta.persistence.*;
-
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 

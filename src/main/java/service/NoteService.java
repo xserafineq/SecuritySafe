@@ -3,7 +3,6 @@ package service;
 import model.*;
 import org.hibernate.Session;
 
-import java.time.LocalDate;
 
 import static database.HibernateUtil.sessionFactory;
 

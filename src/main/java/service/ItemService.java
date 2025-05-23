@@ -1,6 +1,5 @@
 package service;
 
-import model.Safe;
 import model.SafeItem;
 import model.User;
 
