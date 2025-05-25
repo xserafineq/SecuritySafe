@@ -15,7 +15,9 @@ public abstract class ItemService {
 
     public abstract void updateItem(String s1, String s2,String s3,User user);
 
-    public abstract void updateItem(String s1, String s2,User user);
+    public abstract void updateItem(String s1, String s2, String s3, String s4, User user);
+
+    public abstract void updateItem(String s1, String s2, User user);
 
 
     public String hideContent(String content) {

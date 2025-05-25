@@ -72,9 +72,9 @@ public class SafeController {
                 switch (option) {
                     case "Hasla":
                         Password password = (Password) new PasswordService().getItem(user,itemsList.getSelectionModel().getSelectedItem());
-                        System.out.println(password.getName());
                         loginInput.setText(password.getLogin());
                         String oldLogin = password.getLogin();
+                        String oldPassword = password.getPassword();
                         System.out.println(password.getLogin());
                         passwordInput.setText(new PasswordService().hideContent(password.getPassword()));
 
@@ -105,7 +105,7 @@ public class SafeController {
 
                         editBtn.setOnAction( e3 -> {
                             if(new ConfirmationAlert("Edytowanie","Czy napewno chcesz edytowac","Działanie jest nieodwracalne").isRespond()) {
-                                new PasswordService().updateItem(oldLogin, loginInput.getText(), passwordInput.getText(), user);
+                                new PasswordService().updateItem(oldLogin, loginInput.getText(), passwordInput.getText(),oldPassword, user);
                                 password.setPassword(passwordInput.getText());
                             }
                         });

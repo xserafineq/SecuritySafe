@@ -59,6 +59,11 @@ public class NoteService extends ItemService {
     }
 
     @Override
+    public void updateItem(String s1, String s2, String s3, String s4, User user) {
+
+    }
+
+    @Override
     public void updateItem(String s1, String s2, User user) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();

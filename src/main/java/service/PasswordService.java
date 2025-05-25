@@ -55,15 +55,21 @@ public class PasswordService extends ItemService{
     }
 
     @Override
-    public void updateItem(String s1, String s2,String s3,User user) {
+    public void updateItem(String s1, String s2, String s3, User user) {
+
+    }
+
+    @Override
+    public void updateItem(String s1, String s2, String s3, String s4, User user) {
         System.out.println("xd:" + s1 + " " + s2 + " " + s3);
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             int safeId = user.getSafe().getId();
             Password result = session.createQuery(
-                            "FROM Password p WHERE p.login = :s1 and p.safe.id=: safeId", Password.class)
+                            "FROM Password p WHERE p.login = :s1 and p.safe.id=: safeId and p.password = :s4", Password.class)
                     .setParameter("safeId", safeId)
                     .setParameter("s1", s1)
+                    .setParameter("s4", s4)
                     .uniqueResult();
             result.setLogin(s2);
             result.setPassword(s3);
