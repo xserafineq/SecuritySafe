@@ -147,7 +147,6 @@ public class SafeController {
                         break;
                     case "Linki":
                         HyperLink link = (HyperLink) new HyperLinkService().getItem(user,itemsList.getSelectionModel().getSelectedItem());
-                        System.out.println(link.getTitle());
 
                         linkInput.setText(new NoteService().hideContent(link.getUrl()));
 
@@ -174,7 +173,7 @@ public class SafeController {
 
                         editBtn.setOnAction( e3 -> {
                             if(new ConfirmationAlert("Edytowanie","Czy napewno chcesz edytowac","Działanie jest nieodwracalne").isRespond()) {
-                                new HyperLinkService().updateItem(link.getUrl(),noteInput.getText(),user);
+                                new HyperLinkService().updateItem(link.getUrl(),linkInput.getText(),user);
                                 link.setUrl(linkInput.getText());
                             }
                         });
