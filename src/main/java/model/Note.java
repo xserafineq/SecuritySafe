@@ -17,10 +17,6 @@ public class Note extends SafeItem{
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    @ManyToOne
     @JoinColumn(name = "safe_id")
     private Safe safe;
 
@@ -34,10 +30,6 @@ public class Note extends SafeItem{
 
     public String getContent() {
         return content;
-    }
-
-    public Category getCategory() {
-        return category;
     }
 
     public Safe getSafe() {
@@ -54,10 +46,6 @@ public class Note extends SafeItem{
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public void setSafe(Safe safe) {

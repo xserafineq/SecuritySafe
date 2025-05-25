@@ -1,5 +1,7 @@
 package service;
 
+import com.example.safe.Alerts.ConnectionAlert;
+import javafx.scene.control.Alert;
 import model.Safe;
 import model.User;
 import org.hibernate.Session;
@@ -36,8 +38,8 @@ public class UserService {
             Safe safe = new Safe();
             safe.setUser(user);
             user.setSafe(safe);
-            session.save(user);
-            session.getTransaction().commit();
+                session.save(user);
+                session.getTransaction().commit();
         }
     }
 

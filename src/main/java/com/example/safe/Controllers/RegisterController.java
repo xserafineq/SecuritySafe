@@ -29,7 +29,13 @@ public class RegisterController {
     public void register(javafx.event.ActionEvent event) throws IOException {
         User user = new User();
         user.setEmail(email.getText());
-        user.setPassword(password.getText());
+        if(password.getText().length()>=5) {
+            user.setPassword(password.getText());
+        }else {
+            new ConnectionAlert("Błąd","Wystąpił błąd podczas rejestracji",
+                    "Zbyt krótkie hasło", Alert.AlertType.ERROR);
+            return;
+        }
         try {
             new UserService().registerUser(user);
         }catch (Exception e){

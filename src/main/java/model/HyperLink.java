@@ -17,9 +17,6 @@ public class HyperLink extends SafeItem{
     private String url;
     @Column(name = "last_modified")
     private LocalDate lastModified;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
 
     @ManyToOne
     @JoinColumn(name = "safe_id")
@@ -51,10 +48,6 @@ public class HyperLink extends SafeItem{
 
     public void setLastModified(LocalDate lastModified) {
         this.lastModified = lastModified;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public void setSafe(Safe safe) {

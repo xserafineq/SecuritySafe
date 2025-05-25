@@ -19,9 +19,6 @@ public class Password extends SafeItem{
     @Column(name = "login")
     private String login;
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-    @ManyToOne
     @JoinColumn(name = "safe_id")
     private Safe safe;
 
@@ -60,10 +57,6 @@ public class Password extends SafeItem{
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public void setSafe(Safe safe) {

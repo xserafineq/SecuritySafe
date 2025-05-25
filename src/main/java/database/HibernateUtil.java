@@ -13,13 +13,12 @@ public class HibernateUtil {
                     .addAnnotatedClass(User.class)
                     .addAnnotatedClass(Note.class)
                     .addAnnotatedClass(Safe.class)
-                    .addAnnotatedClass(Category.class)
                     .addAnnotatedClass(Password.class)
                     .addAnnotatedClass(HyperLink.class)
                     .addAnnotatedClass(SessionLog.class)
                     .buildSessionFactory();
         } catch (Throwable ex) {
-            System.err.println("Initial SessionFactory creation failed." + ex);
+            System.err.println(ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

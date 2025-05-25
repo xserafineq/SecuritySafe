@@ -1,13 +1,16 @@
 package com.example.safe.Controllers;
 import com.example.safe.Alerts.ConfirmationAlert;
 import com.example.safe.Alerts.PromptDialog;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.HyperLink;
 import model.Note;
 import model.Password;
@@ -93,6 +96,9 @@ public class SafeController {
                             if(new ConfirmationAlert("Usuwanie","Czy napewno chcesz usunąć?","Działanie jest nieodwracalne").isRespond()) {
                                 new PasswordService().removeItem(password.getId());
                                 fillListView(option);
+                                loginInput.setText("");
+                                passwordInput.setText("");
+
                             };
 
                         });
@@ -100,6 +106,7 @@ public class SafeController {
                         editBtn.setOnAction( e3 -> {
                             if(new ConfirmationAlert("Edytowanie","Czy napewno chcesz edytowac","Działanie jest nieodwracalne").isRespond()) {
                                 new PasswordService().updateItem(oldLogin, loginInput.getText(), passwordInput.getText(), user);
+                                password.setPassword(passwordInput.getText());
                             }
                         });
 
@@ -126,12 +133,14 @@ public class SafeController {
                             if(new ConfirmationAlert("Usuwanie","Czy napewno chcesz usunąć?","Działanie jest nieodwracalne").isRespond()) {
                                 new NoteService().removeItem(note.getId());
                                 fillListView(option);
+                                noteInput.setText("");
                             };
                         });
 
                         editBtn.setOnAction( e3 -> {
                             if(new ConfirmationAlert("Edytowanie","Czy napewno chcesz edytowac","Działanie jest nieodwracalne").isRespond()) {
                                 new NoteService().updateItem(note.getContent(),noteInput.getText(),user);
+                                note.setContent(noteInput.getText());
                             }
                         });
 
@@ -159,12 +168,14 @@ public class SafeController {
                             if(new ConfirmationAlert("Usuwanie","Czy napewno chcesz usunąć?","Działanie jest nieodwracalne").isRespond()) {
                                 new HyperLinkService().removeItem(link.getId());
                                 fillListView(option);
+                                linkInput.setText("");
                             };
                         });
 
                         editBtn.setOnAction( e3 -> {
                             if(new ConfirmationAlert("Edytowanie","Czy napewno chcesz edytowac","Działanie jest nieodwracalne").isRespond()) {
                                 new HyperLinkService().updateItem(link.getUrl(),noteInput.getText(),user);
+                                link.setUrl(linkInput.getText());
                             }
                         });
 
@@ -180,7 +191,7 @@ public class SafeController {
     }
 
     public void logout(ActionEvent actionEvent) {
-        System.exit(0);
+        Platform.exit();
     }
 
     public void fillListView(String option) {
@@ -222,8 +233,9 @@ public class SafeController {
                 notesPanel.setManaged(false);
 
                 addBtn.setOnAction( e3 -> {
-                    new PromptDialog("Hasło","Login","Hasło","Nazwa",user);
-                    fillListView(option);
+                    if(new PromptDialog("Hasło","Login","Hasło","Nazwa",user).isResult()) {
+                        fillListView(option);
+                    }
                 });
 
                 break;
@@ -236,8 +248,11 @@ public class SafeController {
                 notesPanel.setManaged(true);
 
                 addBtn.setOnAction( e3 -> {
-                    new PromptDialog("Notatka","Nazwa","Zawartość","Nazwa",user);
-                    fillListView(option);
+                    PromptDialog dialog = new PromptDialog("Notatka","Nazwa","Zawartość","Nazwa",user);
+                    if(dialog.isResult()) {
+                        fillListView(option);
+                    }
+
                 });
 
                 break;
@@ -249,8 +264,9 @@ public class SafeController {
                 notesPanel.setVisible(false);
                 notesPanel.setManaged(false);
                 addBtn.setOnAction( e3 -> {
-                    new PromptDialog("Link","Nazwa","Odnośnik","Nazwa",user);
-                    fillListView(option);
+                    if( new PromptDialog("Link","Nazwa","Odnośnik","Nazwa",user).isResult()) {
+                        fillListView(option);
+                    }
                 });
                 break;
         }

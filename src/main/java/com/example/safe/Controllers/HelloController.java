@@ -31,11 +31,11 @@ public class HelloController {
     @FXML
     private void login(ActionEvent event) throws Exception {
         UserService equalDataService = new UserService();
-
         boolean loginSuccesfull = equalDataService.equalLoginData(email.getText(), password.getText());
+        System.out.println(loginSuccesfull);
         if (loginSuccesfull) {
-            System.out.println("Login successful");
             new SessionLogService().addSessionLog(loginSuccesfull, new UserService().findUserByEmail(email.getText()));
+            System.out.println("Login successful");
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("safe.fxml"));
             Parent root = loader.load();
 
@@ -45,9 +45,8 @@ public class HelloController {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.getIcons().add(new Image(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/images/logo.png"))));
             stage.show();
+
         }
         else {
             new SessionLogService().addSessionLog(loginSuccesfull, new UserService().findUserByEmail(email.getText()));
