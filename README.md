@@ -1,6 +1,6 @@
 # 🔒 SecuritySafe
 
-Desktopowa aplikacja typu "Sejf", służąca do bezpiecznego przechowywania haseł, notatek oraz poufnych danych. Projekt stawia na intuicyjny interfejs graficzny i prywatność użytkownika.
+Desktopowa aplikacja, służąca do bezpiecznego przechowywania haseł, notatek oraz poufnych danych. Projekt stawia na intuicyjny interfejs graficzny i prywatność użytkownika.
 ---
 ## 🚀 Technologie
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
